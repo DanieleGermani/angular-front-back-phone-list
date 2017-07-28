@@ -1,7 +1,8 @@
 <h3> Phone list </h3>
+<a [routerLink]="['add']"> Add new phone </a>
 <div>
   <div *ngFor="let phone of phones | async" class="blocky">
-    <img height=150 [src]="phone.image" />
+    <img height=150 [src]="phone.imageURL" />
     <h3> {{ phone.name }} </h3>
     <p> {{ phone.brand }} </p>
     <a [routerLink]="['phone', phone._id]"> View Details </a>

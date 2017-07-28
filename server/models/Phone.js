@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const phoneSchema = new mongoose.Schema({
+let phoneSchema = new mongoose.Schema({
   brand: {
     type: String,
     required: [true, 'The phone brand is required']
@@ -16,6 +16,13 @@ const phoneSchema = new mongoose.Schema({
     type: Array,
     default: []
   }
+});
+phoneSchema.set('toJSON', { virtuals: true });
+phoneSchema.virtual('imageURL').get(function() {
+  if(this.image.includes('http')){
+    return this.image;
+  }
+  return `http://localhost:3000${this.image}`;
 });
 
 const Phone = mongoose.model('Phone', phoneSchema);

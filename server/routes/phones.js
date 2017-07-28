@@ -46,12 +46,13 @@ router.put('/:id', (req,res,next) => {
 });
 
 /* CREATE a new Phone. */
-router.post('/', (req, res, next) => {
+const upload = require('../config/multer');
+router.post('/',upload.single('file'), (req, res, next) => {
   const thePhone = new Phone({
     brand: req.body.brand,
     name: req.body.name,
-    specs: req.body.specs,
-    image: req.body.image || ''
+    specs: JSON.parse(req.body.specs) || [],
+    image: `/uploads/${req.file.filename}` || ''
   }).save()
   .then( phone => {
       console.log(`Se ha creado el telefono ID:${phone._id}`);
