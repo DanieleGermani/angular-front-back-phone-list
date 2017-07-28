@@ -12,11 +12,17 @@ import "rxjs/add/operator/mergeMap";
 export class PhoneDetailsComponent implements OnInit {
   phone:object;
   constructor(private route:ActivatedRoute, private phS:PhoneService) {
-    route.params
+    // Sin usar route guards (RESOLVE)
+    /*route.params
     .mergeMap( p => phS.get(p.id) )
     .subscribe( phone => {
       console.log(phone);
       this.phone=phone;
+    });*/
+
+    // Usando rute guards
+    this.route.data.subscribe((resolved) => {
+      this.phone = resolved['phone'];
     });
   }
 

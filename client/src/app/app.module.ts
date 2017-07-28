@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { PhoneService } from '../services/phone.service';
 import { FileSelectDirective } from "ng2-file-upload";
 import { AddPhoneComponent } from './add-phone/add-phone.component';
+import { ResolveDetailsGuardService } from '../services/phoneResolve.service';
+import { PhoneActivationService } from '../services/phoneActivation.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { AddPhoneComponent } from './add-phone/add-phone.component';
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [PhoneService],
+  providers: [PhoneService,ResolveDetailsGuardService,PhoneActivationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
